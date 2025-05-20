@@ -14,14 +14,15 @@ app.get('/api/hello', (_, res) => {
   res.json({ message: 'Hello from Express' });
 });
 
-async function mockGeminiExtract(text: string) {
+async function mockGeminiExtract(text: string): Promise<{ name: string; value: number }[]> {
   // TODO: integrate Gemini API. Returns [{ name: biomarkerName, value: number }]
   return [];
 }
 
-app.post('/api/upload', upload.single('file'), async (req, res) => {
+app.post('/api/upload', upload.single('file'), async (req, res): Promise<void> => {
   if (!req.file) {
-    return res.status(400).json({ error: 'File required' });
+    res.status(400).json({ error: 'File required' });
+    return;
   }
   const content = await fs.readFile(req.file.path, 'utf-8');
   const values = await mockGeminiExtract(content);
