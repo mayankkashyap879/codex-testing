@@ -15,8 +15,25 @@ app.get('/api/hello', (_, res) => {
 });
 
 async function mockGeminiExtract(text: string): Promise<{ name: string; value: number }[]> {
-  // TODO: integrate Gemini API. Returns [{ name: biomarkerName, value: number }]
-  return [];
+  // Simple text parsing implementation used as a placeholder for the
+  // real Gemini integration. It searches the uploaded text for biomarker
+  // names and captures the first number that follows the name.
+  const biomarkers = await prisma.biomarker.findMany({ select: { name: true } });
+  const results: { name: string; value: number }[] = [];
+
+  for (const { name } of biomarkers) {
+    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`${escaped}\\s*[:=-]?\\s*([0-9]*\\.?[0-9]+)`, 'i');
+    const match = text.match(regex);
+    if (match) {
+      const value = parseFloat(match[1]);
+      if (!isNaN(value)) {
+        results.push({ name, value });
+      }
+    }
+  }
+
+  return results;
 }
 
 app.post('/api/upload', upload.single('file'), async (req, res): Promise<void> => {
@@ -39,6 +56,23 @@ app.post('/api/upload', upload.single('file'), async (req, res): Promise<void> =
     });
   }
   res.json({ success: true, reportId: report.id });
+});
+
+app.get('/api/report/:id', async (req, res): Promise<void> => {
+  const id = parseInt(req.params.id, 10);
+  if (isNaN(id)) {
+    res.status(400).json({ error: 'Invalid id' });
+    return;
+  }
+  const report = await prisma.labReport.findUnique({
+    where: { id },
+    include: { results: { include: { biomarker: true } } },
+  });
+  if (!report) {
+    res.status(404).json({ error: 'Report not found' });
+    return;
+  }
+  res.json(report);
 });
 
 app.listen(port, () => {

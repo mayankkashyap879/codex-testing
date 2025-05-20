@@ -42,5 +42,6 @@ pnpm --filter server run seed
 ```
 
 Start the app and visit the client at `http://localhost:3000` to upload lab reports.
+After uploading a report you will be given a link to view the parsed biomarker values.
 
 See `AGENTS.md` for contributor guidelines.

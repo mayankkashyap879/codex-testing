@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [message, setMessage] = useState('');
+  const [reportId, setReportId] = useState<number | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,7 +16,12 @@ export default function Home() {
       body: formData,
     });
     const data = await res.json();
-    setMessage(JSON.stringify(data));
+    if (data.reportId) {
+      setReportId(data.reportId);
+      setMessage('Upload successful');
+    } else {
+      setMessage(JSON.stringify(data));
+    }
   };
 
   return (
@@ -23,7 +30,13 @@ export default function Home() {
         <input type="file" onChange={e => setFile(e.target.files?.[0] || null)} />
         <button type="submit" className="bg-blue-500 text-white px-4 py-2">Upload</button>
       </form>
-      {message && <pre>{message}</pre>}
+      {message && <p>{message}</p>}
+      {reportId && (
+        <p>
+          View report{' '}
+          <Link href={`/report/${reportId}`}>here</Link>
+        </p>
+      )}
     </div>
   );
 }
