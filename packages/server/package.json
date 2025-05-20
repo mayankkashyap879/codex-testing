@@ -5,14 +5,18 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
-    "express": "latest"
+    "express": "latest",
+    "multer": "latest",
+    "@prisma/client": "latest"
   },
   "devDependencies": {
     "typescript": "latest",
     "ts-node": "latest",
-    "@types/express": "latest"
+    "@types/express": "latest",
+    "prisma": "latest"
   }
 }

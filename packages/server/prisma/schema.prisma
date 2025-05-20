@@ -6,3 +6,32 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model Biomarker {
+  id                Int     @id @default(autoincrement())
+  name              String  @unique
+  unit              String?
+  category          String?
+  description       String?
+  measurementType   String?
+  importance        Int?
+  optimalRangeLow   Float?
+  optimalRangeHigh  Float?
+  results           BiomarkerResult[]
+}
+
+model LabReport {
+  id         Int     @id @default(autoincrement())
+  filePath   String
+  createdAt  DateTime @default(now())
+  results    BiomarkerResult[]
+}
+
+model BiomarkerResult {
+  id          Int     @id @default(autoincrement())
+  value       Float
+  biomarker   Biomarker @relation(fields: [biomarkerId], references: [id])
+  biomarkerId Int
+  report      LabReport @relation(fields: [reportId], references: [id])
+  reportId    Int
+}
