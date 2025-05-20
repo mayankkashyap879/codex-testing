@@ -16,6 +16,13 @@ Install dependencies:
 pnpm install
 ```
 
+This command runs the repository `postinstall` script which invokes
+`prisma generate` for the server package.
+
+Configure environment variables by copying
+`packages/server/.env.example` to `packages/server/.env` and adjust
+the values for your local database connection.
+
 Run the development servers:
 
 ```bash
