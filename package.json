@@ -1,0 +1,9 @@
+{
+  "name": "monorepo-app",
+  "private": true,
+  "packageManager": "pnpm@10.5.2",
+  "scripts": {
+    "dev:client": "pnpm --filter client dev",
+    "dev:server": "pnpm --filter server dev"
+  }
+}
