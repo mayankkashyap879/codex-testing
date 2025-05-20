@@ -19,14 +19,13 @@ async function mockGeminiExtract(text: string): Promise<Array<{name: string; val
   return [];
 }
 
-app.post('/api/upload', upload.single('file'), async (req: any, res: any) => {
-  const file = (req as any).file as { path: string } | undefined;
-  if (!file) {
+app.post('/api/upload', upload.single('file'), async (req, res) => {
+  if (!req.file) {
     return res.status(400).json({ error: 'File required' });
   }
-  const content = await fs.readFile(file.path, 'utf-8');
+  const content = await fs.readFile(req.file.path, 'utf-8');
   const values = await mockGeminiExtract(content);
-  const report = await prisma.labReport.create({ data: { filePath: file.path } });
+  const report = await prisma.labReport.create({ data: { filePath: req.file.path } });
   for (const v of values) {
     const biomarker = await prisma.biomarker.findUnique({ where: { name: v.name } });
     if (!biomarker) continue;
