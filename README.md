@@ -23,6 +23,9 @@ Configure environment variables by copying
 `packages/server/.env.example` to `packages/server/.env` and adjust
 the values for your local database connection.
 
+The server's `dev` and `seed` scripts automatically load this `.env` file
+using `dotenv`, so you don't need to configure it manually.
+
 Run the development servers:
 
 ```bash

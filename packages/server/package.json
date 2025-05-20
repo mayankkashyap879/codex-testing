@@ -4,9 +4,9 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "node -r dotenv/config node_modules/ts-node/dist/bin.js src/index.ts",
     "build": "tsc",
-    "seed": "ts-node prisma/seed.ts",
+    "seed": "node -r dotenv/config node_modules/ts-node/dist/bin.js prisma/seed.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "ts-node": "latest",
     "@types/express": "latest",
     "prisma": "latest",
-    "@types/multer": "latest"
+    "@types/multer": "latest",
+    "dotenv": "latest"
   }
 }
