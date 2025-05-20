@@ -1,0 +1,78 @@
+[
+    {
+        "name": "% Transferrin Saturation",
+        "category": "Iron Studies",
+        "unit": "%",
+        "description": "Percentage of transferrin iron\u2011binding sites that are occupied by iron.",
+        "optimalRangeLow": 20,
+        "optimalRangeHigh": 50,
+        "warningLow": 15,
+        "warningHigh": 50,
+        "criticalLow": 10,
+        "criticalHigh": 90,
+        "measurementType": "percentage",
+        "importance": 8,
+        "details": "Transferrin saturation is calculated as (serum iron \u00f7 total iron\u2010binding capacity) \u00d7 100 and is used to assess iron status; values <20% suggest deficiency and >50% suggest overload.",
+        "referenceUrl": "https://emedicine.medscape.com/article/2087960-overview",
+        "conditionalRanges": [
+            {
+                "condition": "Children (1-10 years)",
+                "optimalRangeLow": 22,
+                "optimalRangeHigh": 39
+            },
+            {
+                "condition": "Adolescents (10-18 years)",
+                "optimalRangeLow": 27,
+                "optimalRangeHigh": 44
+            },
+            {
+                "condition": "Newborn",
+                "optimalRangeLow": 56,
+                "optimalRangeHigh": 74
+            }
+        ]
+    },
+    {
+        "name": "17-hydroxyprogesterone",
+        "category": "Hormones / Endocrine",
+        "unit": "ng/dL",
+        "description": "A steroid hormone produced by the adrenal cortex and gonads; a precursor in the biosynthesis of cortisol and androgenic steroids.",
+        "measurementType": "numeric",
+        "importance": 7,
+        "optimalRangeLow": 27,
+        "optimalRangeHigh": 199,
+        "warningLow": 20,
+        "warningHigh": 300,
+        "criticalLow": 10,
+        "criticalHigh": 1000,
+        "details": "Used primarily to screen for congenital adrenal hyperplasia (CAH) due to 21-hydroxylase deficiency; levels vary by age, sex, and menstrual cycle phase.",
+        "referenceUrl": "https://emedicine.medscape.com/article/242270-overview",
+        "conditionalRanges": [
+            {
+                "condition": "Newborn",
+                "optimalRangeLow": 0,
+                "optimalRangeHigh": 400
+            },
+            {
+                "condition": "Children",
+                "optimalRangeLow": 0,
+                "optimalRangeHigh": 110
+            },
+            {
+                "condition": "Adult Male",
+                "optimalRangeLow": 27,
+                "optimalRangeHigh": 199
+            },
+            {
+                "condition": "Adult Female (Follicular phase)",
+                "optimalRangeLow": 20,
+                "optimalRangeHigh": 100
+            },
+            {
+                "condition": "Adult Female (Luteal phase)",
+                "optimalRangeLow": 100,
+                "optimalRangeHigh": 300
+            }
+        ]
+    }
+]

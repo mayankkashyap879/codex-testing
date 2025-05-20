@@ -23,4 +23,14 @@ pnpm dev:client    # Next.js frontend
 pnpm dev:server    # Express backend
 ```
 
+## Biomarker Tracking
+
+Seed the database with initial biomarkers:
+
+```bash
+pnpm --filter server run seed
+```
+
+Start the app and visit the client at `http://localhost:3000` to upload lab reports.
+
 See `AGENTS.md` for contributor guidelines.
