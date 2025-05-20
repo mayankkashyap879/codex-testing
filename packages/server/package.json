@@ -17,6 +17,7 @@
     "typescript": "latest",
     "ts-node": "latest",
     "@types/express": "latest",
-    "prisma": "latest"
+    "prisma": "latest",
+    "@types/multer": "latest"
   }
 }
